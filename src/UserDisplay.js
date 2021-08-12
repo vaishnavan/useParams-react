@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 export default function UserDisplay() {
   const { id } = useParams();
   const [singleUser, setSingleUser] = useState({});
+  const [userAddress, setUserAddress] = useState({});
 
   useEffect(() => {
     getUserDetail();
@@ -15,6 +16,7 @@ export default function UserDisplay() {
       .get(`https://jsonplaceholder.typicode.com/users/${id}`)
       .then((res) => {
         setSingleUser(res.data);
+        setUserAddress(res.data.address);
       });
   };
   // console.log(address);
@@ -26,6 +28,8 @@ export default function UserDisplay() {
       </div>
       <div>
         <h1>{singleUser.username}</h1>
+        <h3>{userAddress.street}</h3>
+        <h3>{userAddress.city}</h3>
       </div>
     </>
   );
